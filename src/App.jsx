@@ -9,7 +9,7 @@ import {
 import ZoomVideo, { ConnectionState, ReconnectReason } from "@zoom/videosdk"
 import { message, Modal } from "antd"
 // import "antd/dist/antd.min.css"
-import {produce} from "immer"
+import { produce } from "immer"
 import VideoSingle from "./feature/video/video-single"
 import VideoAttach from "./feature/video/video-attach"
 import ZoomContext from "./context/zoom-context"
@@ -69,14 +69,7 @@ const mediaReducer = produce((draft, action) => {
 }, mediaShape)
 
 function App(props) {
-  const {
-    meetingArgs: {
-      enforceGalleryView,
-      enforceVB,
-      customerJoinId,
-      lang
-    }
-  } = props
+  const { meetingArgs: { enforceGalleryView, enforceVB, customerJoinId, lang } } = props
 
   const [loading, setIsLoading] = useState(true)
   const [loadingText, setLoadingText] = useState("")

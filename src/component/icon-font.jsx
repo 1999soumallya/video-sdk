@@ -35,7 +35,6 @@ import IconSwitch from "/svgs/icon-switch.svg"
 import IconNetworkGood from "/svgs/icon-network-good.svg"
 import IconNetworkNormal from "/svgs/icon-network-normal.svg"
 import IconNetworkBad from "/svgs/icon-network-bad.svg"
-import IconLiveStream from "/svgs/icon-live-stream.svg"
 import IconLive from "/svgs/icon-live.svg"
 import IconMove from "/svgs/icon-move.svg"
 import IconAudioOn from "/svgs/icon-audio-on.svg"
@@ -95,7 +94,6 @@ const iconComponentMap = {
   "icon-network-good": IconNetworkGood,
   "icon-network-normal": IconNetworkNormal,
   "icon-network-bad": IconNetworkBad,
-  "icon-live-stream": IconLiveStream,
   "icon-live": IconLive,
   "icon-move": IconMove,
   "icon-audio-on": IconAudioOn,
