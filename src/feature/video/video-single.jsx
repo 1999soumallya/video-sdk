@@ -15,7 +15,6 @@ import Avatar from "./components/avatar"
 import VideoFooter from "./components/video-footer"
 import ShareView from "./components/share-view"
 import RemoteCameraControlPanel from "./components/remote-camera-control"
-import ReportBtn from "./components/report-btn"
 import { useParticipantsChange } from "./hooks/useParticipantsChange"
 import { useCanvasDimension } from "./hooks/useCanvasDimension"
 import { SELF_VIDEO_ID } from "./video-constants"
@@ -224,7 +223,6 @@ const VideoContainer = () => {
         sharing
         selfShareCanvas={shareViewRef.current?.selfShareRef}
       />
-      <ReportBtn />
     </div>
   )
 }

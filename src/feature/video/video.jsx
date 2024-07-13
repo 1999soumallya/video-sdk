@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react"
+import { useState, useContext, useRef } from "react"
 import classnames from "classnames"
 import ZoomContext from "../../context/zoom-context"
 import ZoomMediaContext from "../../context/media-context"
@@ -12,7 +12,6 @@ import { usePagination } from "./hooks/usePagination"
 import { useActiveVideo } from "./hooks/useAvtiveVideo"
 import { useAvatarAction } from "./hooks/useAvatarAction"
 import { useNetworkQuality } from "./hooks/useNetworkQuality"
-import ReportBtn from "./components/report-btn"
 import ShareView from "./components/share-view"
 import RemoteCameraControlPanel from "./components/remote-camera-control"
 import { SELF_VIDEO_ID } from "./video-constants"
@@ -141,7 +140,6 @@ const VideoContainer = props => {
           inSharing={isRecieveSharing}
         />
       )}
-      <ReportBtn />
     </div>
   )
 }
