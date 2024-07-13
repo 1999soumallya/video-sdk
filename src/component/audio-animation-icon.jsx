@@ -1,4 +1,3 @@
-import Icon from "@ant-design/icons"
 import AudioPlayingStep1 from "/svgs/audio/audio-volume-level1.svg"
 import AudioPlayingStep2 from "/svgs/audio/audio-volume-level2.svg"
 import AudioPlayingStep3 from "/svgs/audio/audio-volume-level3.svg"
@@ -27,11 +26,6 @@ export const AudoiAnimationIcon = props => {
     Object.assign(sStyle, style)
   }
   return (
-    <Icon
-      className={className}
-      component={audioPlayingStepMap[`icon-audio-playing-step${level}`]}
-      viewBox="0 0 24 24"
-      style={sStyle}
-    />
+    <img className={className} src={audioPlayingStepMap[`icon-audio-playing-step${level}`]} style={sStyle} />
   )
 }
