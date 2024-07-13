@@ -11,12 +11,15 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
+    "@types/node": "^20.14.10",
     "@zoom/videosdk": "^1.11.10",
     "antd": "^5.19.1",
     "axios": "^1.7.2",
     "classnames": "^2.5.1",
     "crypto-js": "^4.2.0",
     "immer": "^10.1.1",
+    "lodash": "^4.17.21",
+    "path": "^0.12.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-draggable": "^4.4.6",
@@ -31,6 +34,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "sass": "^1.77.8",
-    "vite": "^5.3.1"
+    "vite": "^5.3.1",
+    "vite-plugin-static-copy": "^1.0.6"
   }
 }
