@@ -106,7 +106,7 @@ function App(props) {
         const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IlNvdW1hbGx5YSBEZXkiLCJ1c2VyVW5pcXVlSWQiOiIzZDM0MzA4Mi03Y2NiLTRhMmYtYjY3MS0xN2Q1MzYxN2QwNDciLCJlbWFpbCI6InNvdW1hbGx5YV9pbnN0dWN0dXJlQHlvcG1haWwuY29tIiwicm9sZSI6IklOU1RSVUNUT1IiLCJpYXQiOjE3MjA4MDAyNDIsImV4cCI6MTcyMDg4NjY0Mn0._klB7DcPRcV8TSdneLQFcJb8dlsvC5wvXN6bek2tA4E`
         const response = await axios.post(
           "https://devapigatewayservice.lightforth.org/live-class/createVideoSdkToken",
-          { classId: "19c270de-e468-4a5e-90e2-a595b50c2b0b" },
+          { classId: "ecca911a-04a2-4c70-a746-03895b4e595a" },
           { headers: { Authorization: `Bearer ${token}` } }
         )
 
