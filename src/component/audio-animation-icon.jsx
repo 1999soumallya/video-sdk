@@ -1,13 +1,13 @@
 import Icon from "@ant-design/icons"
-import AudioPlayingStep1 from "./svgs/audio/audio-volume-level1.svg"
-import AudioPlayingStep2 from "./svgs/audio/audio-volume-level2.svg"
-import AudioPlayingStep3 from "./svgs/audio/audio-volume-level3.svg"
-import AudioPlayingStep4 from "./svgs/audio/audio-volume-level4.svg"
-import AudioPlayingStep5 from "./svgs/audio/audio-volume-level5.svg"
-import AudioPlayingStep6 from "./svgs/audio/audio-volume-level6.svg"
-import AudioPlayingStep7 from "./svgs/audio/audio-volume-level7.svg"
-import AudioPlayingStep8 from "./svgs/audio/audio-volume-level8.svg"
-import AudioPlayingStep9 from "./svgs/audio/audio-volume-level9.svg"
+import AudioPlayingStep1 from "/svgs/audio/audio-volume-level1.svg"
+import AudioPlayingStep2 from "/svgs/audio/audio-volume-level2.svg"
+import AudioPlayingStep3 from "/svgs/audio/audio-volume-level3.svg"
+import AudioPlayingStep4 from "/svgs/audio/audio-volume-level4.svg"
+import AudioPlayingStep5 from "/svgs/audio/audio-volume-level5.svg"
+import AudioPlayingStep6 from "/svgs/audio/audio-volume-level6.svg"
+import AudioPlayingStep7 from "/svgs/audio/audio-volume-level7.svg"
+import AudioPlayingStep8 from "/svgs/audio/audio-volume-level8.svg"
+import AudioPlayingStep9 from "/svgs/audio/audio-volume-level9.svg"
 
 const audioPlayingStepMap = {
   "icon-audio-playing-step1": AudioPlayingStep1,

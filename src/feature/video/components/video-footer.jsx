@@ -23,14 +23,9 @@ import {
   VideoCapturingState,
   SharePrivilege,
   MobileVideoFacingMode,
-  LiveStreamStatus,
   ShareStatus
 } from "@zoom/videosdk"
-import { LiveTranscriptionButton } from "./live-transcription"
 import { LeaveButton } from "./leave"
-import { TranscriptionSubtitle } from "./transcription-subtitle"
-import { LiveStreamButton, LiveStreamModal } from "./live-stream"
-import { IconFont } from "../../../component/icon-font"
 import { VideoMaskModel } from "./video-mask-modal"
 
 const isAudioEnable = typeof AudioWorklet === "function"
@@ -38,7 +33,6 @@ const VideoFooter = props => {
   const { className, selfShareCanvas, sharing } = props
   const zmClient = useContext(ZoomContext)
   const { mediaStream } = useContext(ZoomMediaContext)
-  const liveTranscriptionClient = zmClient.getLiveTranscriptionClient()
   const liveStreamClient = zmClient.getLiveStreamClient()
 
   const [isStartedAudio, setIsStartedAudio] = useState(
@@ -51,9 +45,8 @@ const VideoFooter = props => {
   const [isSupportPhone, setIsSupportPhone] = useState(false)
   const [phoneCountryList, setPhoneCountryList] = useState([])
   const [phoneCallStatus, setPhoneCallStatus] = useState()
-  const [isStartedLiveTranscription, setIsStartedLiveTranscription] = useState(
-    false
-  )
+  const [isStartedLiveTranscription, setIsStartedLiveTranscription] = useState(false)
+
   const [isDisableCaptions, setIsDisableCaptions] = useState(false)
   const [isMirrored, setIsMirrored] = useState(false)
   const [isBlur, setIsBlur] = useState(false)
@@ -82,7 +75,6 @@ const VideoFooter = props => {
   const [activePlaybackUrl, setActivePlaybackUrl] = useState("")
   const [isMicrophoneForbidden, setIsMicrophoneForbidden] = useState(false)
 
-  const [liveStreamVisible, setLiveStreamVisible] = useState(false)
   const [liveStreamStatus, setLiveStreamStatus] = useState(
     liveStreamClient?.getLiveStreamStatus()
   )
@@ -301,31 +293,6 @@ const VideoFooter = props => {
     }
   }, [mediaStream, selfShareCanvas])
 
-  const onLiveTranscriptionClick = useCallback(async () => {
-    if (isDisableCaptions) {
-      message.info("Captions has been disable by host.")
-    } else if (isStartedLiveTranscription) {
-      message.info("Live transcription has started.")
-    } else if (!isStartedLiveTranscription) {
-      await liveTranscriptionClient?.startLiveTranscription()
-      setIsStartedLiveTranscription(true)
-    }
-  }, [isStartedLiveTranscription, isDisableCaptions, liveTranscriptionClient])
-
-  const onDisableCaptions = useCallback(
-    async disable => {
-      if (disable && !isDisableCaptions) {
-        await liveTranscriptionClient?.disableCaptions(disable)
-        setIsStartedLiveTranscription(false)
-        setIsDisableCaptions(true)
-      } else if (!disable && isDisableCaptions) {
-        await liveTranscriptionClient?.disableCaptions(disable)
-        setIsDisableCaptions(false)
-      }
-    },
-    [isDisableCaptions, liveTranscriptionClient]
-  )
-
   const onLeaveClick = useCallback(async () => {
     await zmClient.leave()
   }, [zmClient])
@@ -419,19 +386,6 @@ const VideoFooter = props => {
     [isStartedAudio, activePlaybackUrl, mediaStream]
   )
 
-  const onLiveStreamClick = useCallback(() => {
-    if (liveStreamStatus === LiveStreamStatus.Ended) {
-      setLiveStreamVisible(true)
-    } else if (liveStreamStatus === LiveStreamStatus.InProgress) {
-      liveStreamClient?.stopLiveStream()
-    }
-  }, [liveStreamStatus, liveStreamClient])
-  const onLiveStreamStatusChange = useCallback(status => {
-    setLiveStreamStatus(status)
-    if (status === LiveStreamStatus.Timeout) {
-      message.error("Start live streaming timeout")
-    }
-  }, [])
   useEffect(() => {
     zmClient.on("current-audio-change", onHostAudioMuted)
     zmClient.on("passively-stop-share", onPassivelyStopShare)
@@ -444,7 +398,6 @@ const VideoFooter = props => {
     zmClient.on("caption-message", onCaptionMessage)
     zmClient.on("caption-host-disable", onCaptionDisable)
     zmClient.on("share-can-see-screen", onCanSeeMyScreen)
-    zmClient.on("live-stream-status", onLiveStreamStatusChange)
     return () => {
       zmClient.off("current-audio-change", onHostAudioMuted)
       zmClient.off("passively-stop-share", onPassivelyStopShare)
@@ -457,7 +410,6 @@ const VideoFooter = props => {
       zmClient.off("caption-message", onCaptionMessage)
       zmClient.off("caption-host-disable", onCaptionDisable)
       zmClient.off("share-can-see-screen", onCanSeeMyScreen)
-      zmClient.off("live-stream-status", onLiveStreamStatusChange)
     }
   }, [
     zmClient,
@@ -472,7 +424,6 @@ const VideoFooter = props => {
     onCaptionMessage,
     onCanSeeMyScreen,
     onCaptionDisable,
-    onLiveStreamStatusChange
   ])
   useUnmount(() => {
     if (zmClient.getSessionInfo().isInMeeting) {
@@ -547,49 +498,6 @@ const VideoFooter = props => {
           onSharePrivilegeClick={async privilege => {
             await mediaStream?.setSharePrivilege(privilege)
             setSharePrivileg(privilege)
-          }}
-        />
-      )}
-      {liveTranscriptionClient?.getLiveTranscriptionStatus()
-        .isLiveTranscriptionEnabled && (
-          <>
-            <LiveTranscriptionButton
-              isStartedLiveTranscription={isStartedLiveTranscription}
-              isDisableCaptions={isDisableCaptions}
-              isHost={zmClient.isHost()}
-              onDisableCaptions={onDisableCaptions}
-              onLiveTranscriptionClick={onLiveTranscriptionClick}
-            />
-            <TranscriptionSubtitle text={caption.text} />
-          </>
-        )}
-      {liveStreamClient?.isLiveStreamEnabled() && zmClient.isHost() && (
-        <>
-          <LiveStreamButton
-            isLiveStreamOn={liveStreamStatus === LiveStreamStatus.InProgress}
-            onLiveStreamClick={onLiveStreamClick}
-          />
-          <LiveStreamModal
-            visible={liveStreamVisible}
-            setVisible={setLiveStreamVisible}
-            onStartLiveStream={(streanUrl, streamKey, broadcastUrl) => {
-              liveStreamClient.startLiveStream(
-                streanUrl,
-                streamKey,
-                broadcastUrl
-              )
-            }}
-          />
-        </>
-      )}
-      {liveStreamStatus === LiveStreamStatus.InProgress && (
-        <IconFont
-          type="icon-live"
-          style={{
-            position: "fixed",
-            top: "45px",
-            left: "10px",
-            color: "#f00"
           }}
         />
       )}

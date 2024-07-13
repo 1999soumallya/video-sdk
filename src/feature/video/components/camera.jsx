@@ -1,11 +1,6 @@
 import { useContext } from "react"
 import { Button, Tooltip, Dropdown } from "antd"
-import {
-  CheckOutlined,
-  UpOutlined,
-  VideoCameraAddOutlined,
-  VideoCameraOutlined
-} from "@ant-design/icons"
+import { CheckOutlined, UpOutlined, VideoCameraAddOutlined, VideoCameraOutlined } from "@ant-design/icons"
 import ZoomMediaContext from "../../../context/media-context"
 import classNames from "classnames"
 import { getAntdDropdownMenu, getAntdItem } from "./video-footer-utils"
@@ -26,22 +21,7 @@ const videoPlaybacks = [
   }
 ]
 const CameraButton = props => {
-  const {
-    isStartedVideo,
-    className,
-    cameraList,
-    activeCamera,
-    isMirrored,
-    isBlur,
-    isPreview,
-    activePlaybackUrl,
-    onCameraClick,
-    onSwitchCamera,
-    onMirrorVideo,
-    onVideoStatistic,
-    onBlurBackground,
-    onSelectVideoPlayback
-  } = props
+  const { isStartedVideo, className, cameraList, activeCamera, isMirrored, isBlur, isPreview, activePlaybackUrl, onCameraClick, onSwitchCamera, onMirrorVideo, onVideoStatistic, onBlurBackground, onSelectVideoPlayback } = props
   const { mediaStream } = useContext(ZoomMediaContext)
   const onMenuItemClick = payload => {
     if (payload.key === "mirror") {
@@ -103,34 +83,12 @@ const CameraButton = props => {
   return (
     <div className={classNames("camera-footer", className)}>
       {isStartedVideo && menuItems ? (
-        <Dropdown.Button
-          className="vc-dropdown-button"
-          size="large"
-          menu={getAntdDropdownMenu(menuItems, onMenuItemClick)}
-          onClick={onCameraClick}
-          trigger={["click"]}
-          type="ghost"
-          icon={<UpOutlined />}
-          placement="topRight"
-        >
+        <Dropdown.Button className="vc-dropdown-button" size="large" menu={getAntdDropdownMenu(menuItems, onMenuItemClick)} onClick={onCameraClick} trigger={["click"]} type="ghost" icon={<UpOutlined />} placement="topRight">
           <VideoCameraOutlined />
         </Dropdown.Button>
       ) : (
         <Tooltip title={`${isStartedVideo ? "stop camera" : "start camera"}`}>
-          <Button
-            className={classNames("vc-button", className)}
-            icon={
-              isStartedVideo ? (
-                <VideoCameraOutlined />
-              ) : (
-                <VideoCameraAddOutlined />
-              )
-            }
-            ghost={true}
-            shape="circle"
-            size="large"
-            onClick={onCameraClick}
-          />
+          <Button className={classNames("vc-button", className)} icon={isStartedVideo ? (<VideoCameraOutlined />) : (<VideoCameraAddOutlined />)} ghost={true} shape="circle" size="large" onClick={onCameraClick} />
         </Tooltip>
       )}
     </div>
