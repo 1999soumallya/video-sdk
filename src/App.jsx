@@ -69,7 +69,7 @@ const mediaReducer = produce((draft, action) => {
 }, mediaShape)
 
 function App(props) {
-  const { meetingArgs: { enforceGalleryView, enforceVB, customerJoinId, lang } } = props
+  const { meetingArgs: { enforceGalleryView, enforceVB, lang } } = props
 
   const [loading, setIsLoading] = useState(true)
   const [loadingText, setLoadingText] = useState("")
@@ -88,8 +88,7 @@ function App(props) {
     mediaStream
   ])
 
-  const galleryViewWithoutSAB =
-    Number(enforceGalleryView) === 1 && !window.crossOriginIsolated
+  const galleryViewWithoutSAB = Number(enforceGalleryView) === 1 && !window.crossOriginIsolated
   const vbWithoutSAB = Number(enforceVB) === 1 && !window.crossOriginIsolated
 
   useEffect(() => {
@@ -131,14 +130,7 @@ function App(props) {
     return () => {
       ZoomVideo.destroyClient()
     }
-  }, [
-    zmClient,
-    webEndpoint,
-    galleryViewWithoutSAB,
-    customerJoinId,
-    lang,
-    vbWithoutSAB
-  ])
+  }, [zmClient, webEndpoint, galleryViewWithoutSAB, lang, vbWithoutSAB])
 
   const onConnectionChange = useCallback(
     ({ reason, subsessionName, state }) => {
