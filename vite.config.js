@@ -26,8 +26,10 @@ export default defineConfig({
     },
   },
   preview: {
-    host: '0.0.0.0',
+    cors: false,
     port: 80,
+    host: '0.0.0.0',
+    open: false,
     headers: {
       'Cross-Origin-Embedder-Policy': 'require-corp',
       'Cross-Origin-Opener-Policy': 'same-origin',
