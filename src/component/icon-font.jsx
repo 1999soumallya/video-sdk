@@ -1,5 +1,4 @@
 
-import Icon from "@ant-design/icons"
 import IconAdvanced from "/svgs/icon-advanced.svg"
 import IconChat from "/svgs/icon-chat.svg"
 import IconGroup from "/svgs/icon-group.svg"
