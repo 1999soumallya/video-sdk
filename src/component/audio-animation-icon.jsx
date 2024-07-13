@@ -1,12 +1,13 @@
-import AudioPlayingStep1 from "/svgs/audio/audio-volume-level1.svg"
-import AudioPlayingStep2 from "/svgs/audio/audio-volume-level2.svg"
-import AudioPlayingStep3 from "/svgs/audio/audio-volume-level3.svg"
-import AudioPlayingStep4 from "/svgs/audio/audio-volume-level4.svg"
-import AudioPlayingStep5 from "/svgs/audio/audio-volume-level5.svg"
-import AudioPlayingStep6 from "/svgs/audio/audio-volume-level6.svg"
-import AudioPlayingStep7 from "/svgs/audio/audio-volume-level7.svg"
-import AudioPlayingStep8 from "/svgs/audio/audio-volume-level8.svg"
-import AudioPlayingStep9 from "/svgs/audio/audio-volume-level9.svg"
+import Icon from "@ant-design/icons"
+import {ReactComponent as AudioPlayingStep1} from "./svgs/audio/audio-volume-level1.svg"
+import {ReactComponent as AudioPlayingStep2} from "./svgs/audio/audio-volume-level2.svg"
+import {ReactComponent as AudioPlayingStep3} from "./svgs/audio/audio-volume-level3.svg"
+import {ReactComponent as AudioPlayingStep4} from "./svgs/audio/audio-volume-level4.svg"
+import {ReactComponent as AudioPlayingStep5} from "./svgs/audio/audio-volume-level5.svg"
+import {ReactComponent as AudioPlayingStep6} from "./svgs/audio/audio-volume-level6.svg"
+import {ReactComponent as AudioPlayingStep7} from "./svgs/audio/audio-volume-level7.svg"
+import {ReactComponent as AudioPlayingStep8} from "./svgs/audio/audio-volume-level8.svg"
+import {ReactComponent as AudioPlayingStep9} from "./svgs/audio/audio-volume-level9.svg"
 
 const audioPlayingStepMap = {
   "icon-audio-playing-step1": AudioPlayingStep1,
@@ -26,6 +27,6 @@ export const AudoiAnimationIcon = props => {
     Object.assign(sStyle, style)
   }
   return (
-    <img className={className} src={audioPlayingStepMap[`icon-audio-playing-step${level}`]} style={sStyle} />
+    <Icon className={className} component={audioPlayingStepMap[`icon-audio-playing-step${level}`]} viewBox="0 0 24 24" style={sStyle} />
   )
 }
